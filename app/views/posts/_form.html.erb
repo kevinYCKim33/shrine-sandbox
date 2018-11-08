@@ -1,0 +1,50 @@
+<%= form_for(post) do |f| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+
+    <%# will show image if validation fails; will work with cached version %>
+    <% if post.image.present? %>
+      <%= image_tag post.image_url %>
+    <% end %>
+
+    <%# pasted straight from shrine demo section %>
+    <%= f.label :image %>
+    <%= f.hidden_field :image, value: post.cached_image_data %>
+     <%# pending validation fail, it will hold some json in it %>
+     <%# <input value="{"id":"7d0f8854027073f55ce835913a6b7398.png","storage":"store","metadata":{"filename":"avi.png","size":262317,"mime_type":"image/png"}}" type="hidden" name="post[image]" id="post_image"> %>
+     <%# uploaded the image but saved it to cache...not stored yet...since validation fails... %>
+    <%= f.file_field :image %>
+      <%# two fields with exact same name...
+      equivalent to the browser...
+      names of fields are the same...
+      example shows hidden field is first, file field is second
+      browser sends last value of that page for that name...
+      the fiel field will never send the image as hidden field will overwrite
+      (IF we have hidden field second) %>
+      <%# could've also done f.object instead of post %>
+      <%# code will be a bit more reusable if we did it that way %>
+      <%# cached image_data knows the name is image...so it adds image_data... %>
+      <%# generates save the cahced image across forms %>
+  </div>
+
+  <%# manually added since not included in scaffold %>
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
