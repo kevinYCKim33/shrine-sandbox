@@ -17,7 +17,7 @@
 require "shrine/storage/s3"
 
 s3_options = {
-  bucket:            "uppy-shrine", # required
+  bucket:            "beat-shrine", # required
   access_key_id:     Rails.application.credentials.aws[:access_key_id],
   secret_access_key: Rails.application.credentials.aws[:secret_access_key],
   region:            "us-east-2", #ohio

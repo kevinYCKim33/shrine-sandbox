@@ -34,7 +34,7 @@ uppy.on('upload-progress', (file, progress) => {
 uppy.on('upload-success', (file, resp, uploadURL) => {
   console.log(file.name, uploadURL);
   console.log("File's done!");
-  alert("File's done!");
+  // alert("File's done!");
   // construct uploaded file data in the format that Shrine expects
   var uploadedFileData = JSON.stringify({
     // file.meta['key'] ~~ retrieving parameters generated in getUploadParameters
@@ -50,7 +50,7 @@ uppy.on('upload-success', (file, resp, uploadURL) => {
   // set hidden field value to the uploaded file data so that it's submitted with the form as the attachment
   var hiddenInput = $("#immaHidden");
   // debugger;
-  hiddenInput.val(uploadedFileData); 
+  hiddenInput.val(uploadedFileData);
   // var img = new Image()
   // img.width = 300
   // img.alt = fileId
@@ -69,8 +69,9 @@ uppy.on('upload-error', (file, error) => {
 });
 
 var uploadBtn = document.querySelector('.UppyDragDrop-Two-Upload')
-uploadBtn.addEventListener('click', function () {
+uploadBtn.addEventListener('click', function (e) {
   // debugger;
+  e.preventDefault();
   uppy.upload();
 })
 

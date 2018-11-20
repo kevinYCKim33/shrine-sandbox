@@ -6,7 +6,18 @@
 </p>
 
 <%#= image_tag @photo.image.url(public: true) %>
-<%= image_tag @photo.image_url %>
+
+<%= image_tag @photo.image_url, width: 300 %>
+
+<h2>
+  <%= @photo.title %>
+</h2>
+
+<p>
+  <%= @photo.description %>
+</p>
+
+
 
 <%= link_to 'Edit', edit_photo_path(@photo) %> |
 <%= link_to 'Back', photos_path %>

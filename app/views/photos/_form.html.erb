@@ -1,7 +1,21 @@
 <%= form_with(model: photo, local: true) do |form| %>
   <div class="field">
-    <%= form.label :image %>
-    <%= form.file_field :image %>
+    <%#= form.label :image %>
+    <%= form.hidden_field :image, id: "immaHidden" %>
+
+    <div class="UppyForm"> I get converted to an Uppy button if Uppy works properly! </div>
+
+    <div class="progress" style="width: 300px">
+      <div class="progress-bar"></div>
+    </div>
+
+    <button class="UppyDragDrop-Two-Upload">Upload</button>
+
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+
+    <%= form.label :description %>
+    <%= form.text_field :description %>
   </div>
 
   <div class="actions">
