@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # mount ImageUploader::UploadEndpoint => "/images/upload" #go rails tutorial
   mount ImageUploader.upload_endpoint(:cache) => "/images/upload" #new doc
+  # mount ImageUploader::UploadEndpoint => "/images/upload"
 
   resources :photos
   resources :posts
