@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   # mount ImageUploader::UploadEndpoint => "/images/upload" #go rails tutorial
-  mount ImageUploader.upload_endpoint(:cache) => "/images/upload" #new doc
+
+  # FOR DEVELOPMENT
+    # mount ImageUploader.upload_endpoint(:cache) => "/images/upload" #new doc
+  # FOR PRODUCTION AND S3
+  mount Shrine.presign_endpoint(:cache) => "/s3/params"
 
   resources :photos
   resources :posts

@@ -17,7 +17,7 @@
 require "shrine/storage/s3"
 
 s3_options = {
-  bucket:            "beat-shrine", # required
+  bucket:            "uppy-shrine", # required
   access_key_id:     Rails.application.credentials.aws[:access_key_id],
   secret_access_key: Rails.application.credentials.aws[:secret_access_key],
   region:            "us-east-2", #ohio
@@ -30,5 +30,17 @@ Shrine.storages = {
 
 Shrine.plugin :activerecord #changed from :sequel by go rails
 Shrine.plugin :upload_endpoint # for direct upload # SHRINE DEPRECATION WARNING: The direct_upload plugin has been deprecated in favor of upload_endpoint and presign_endpoint plugins. The direct_upload plugin will be removed in Shrine 3.
-Shrine.plugin :presign_endpoint # for direct upload # SHRINE DEPRECATION WARNING: The direct_upload plugin has been deprecated in favor of upload_endpoint and presign_endpoint plugins. The direct_upload plugin will be removed in Shrine 3.
+# Shrine.plugin :presign_endpoint # for direct upload # SHRINE DEPRECATION WARNING: The direct_upload plugin has been deprecated in favor of upload_endpoint and presign_endpoint plugins. The direct_upload plugin will be removed in Shrine 3.
+Shrine.plugin :presign_endpoint, presign_options: -> (request) {
+  # Uppy will send the "filename" and "type" query parameters
+  # binding.pry
+  filename = request.params["filename"]
+  type     = request.params["type"]
+
+  {
+    content_disposition:    "inline; filename=\"#{filename}\"", # set download filename
+    content_type:           type                               # set content type (defaults to "application/octet-stream")
+    # content_length_range:   0..(10*1024*1024),                  # limit upload size to 10 MB
+  }
+}
 Shrine.plugin :restore_cached_data #for metadata
