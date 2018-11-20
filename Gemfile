@@ -5,8 +5,10 @@ ruby '2.5.1'
 
 gem 'shrine'
 gem 'aws-sdk' #can access all aws
-gem 'roda' #allow shrine rack app to order to give us aws presigned keys... in order to send file over
-gem 'jquery-fileupload-rails' # give us that??
+gem 'image_processing', '~> 1.0'
+
+# gem 'roda' #allow shrine rack app to order to give us aws presigned keys... in order to send file over
+# gem 'jquery-fileupload-rails' # give us that??
 gem 'bootstrap-sass' #order to give us lil progress bar...in order to see progress is happening...
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -54,6 +56,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'pry'
 end
 
 group :test do

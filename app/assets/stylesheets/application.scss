@@ -14,4 +14,38 @@
  *= require_self
  */
 
-@import "bootstrap"
+@import "bootstrap";
+
+.drag-drop-area {
+  border: 1px solid blue !important;
+  width: 500px !important;
+  height: 500px !important;
+}
+
+.drag {
+  border: 1px solid red;
+  background: gray;
+}
+
+.uppy-FileInput-btn {
+  // background: none!important;
+  // -webkit-appearance: none!important;
+  // font-family: inherit!important;
+  // font-size: inherit!important;
+  // line-height: 1!important;
+  // padding: 0!important;
+  // margin: 0!important;
+  // border: 0!important;
+  // color: inherit!important;
+  // font-family: sans-serif!important;
+  // font-size: .85em!important;
+  // padding: 10px 15px!important;
+  // color: #14457f!important;
+  // border: 1px solid #14457f!important;
+  // border-radius: 8px!important;
+  // cursor: pointer!important;
+  background: purple !important;
+  color: white !important;
+  border-color: purple !important;
+  border-radius: 0 !important;
+}
