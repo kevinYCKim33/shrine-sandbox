@@ -10,7 +10,7 @@
 # }
 #
 # Shrine.plugin :activerecord #changed from :sequel by go rails
-# Shrine.plugin :cached_attachment_data # for forms # use just to see how it works...
+Shrine.plugin :cached_attachment_data # for forms # use just to see how it works...
 
 ## FOR S3 PRODUCTION
 

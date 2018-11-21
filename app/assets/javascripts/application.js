@@ -1,8 +1,28 @@
-var uppy = Uppy.Core()
-// uppy.use(Uppy.DragDrop, { target: '#drag-drop-area' });
+var uppy = Uppy.Core({
+  autoProceed: false,
+});
+
+var imagePreview = document.getElementById("preview-cover-photo");
+
 
 // Outputs a boring Upload File button
-uppy.use(Uppy.FileInput, { target: '.UppyForm', replaceTargetContent: true });
+// uppy.use(Uppy.FileInput, { target: '.UppyForm', replaceTargetContent: true });
+
+uppy.use(Uppy.DragDrop, {
+  target: '#UppyDragDrop-Two',
+  width: '100%',
+  height: '100%',
+  note: 'Images and video only, 2–3 files, up to 1 MB',
+  locale: {
+    strings: {
+      // Text to show on the droppable area.
+      // `%{browse}` is replaced with a link that opens the system file selection dialog.
+      dropHereOr: 'Drop here or %{browse}',
+      // Used as the label for the link that opens the system file selection dialog.
+      browse: 'browse'
+    }
+  }
+})
 
 // uppy.use(Uppy.ProgressBar, { target: '.UppyDragDrop-Two-Progress', replaceTargetContent: true });
 
@@ -34,6 +54,8 @@ uppy.on('upload-progress', (file, progress) => {
 uppy.on('upload-success', (file, resp, uploadURL) => {
   console.log(file.name, uploadURL);
   console.log("File's done!");
+  imagePreview.src = URL.createObjectURL(file.data)
+
   // alert("File's done!");
   // construct uploaded file data in the format that Shrine expects
   var uploadedFileData = JSON.stringify({
@@ -46,6 +68,8 @@ uppy.on('upload-success', (file, resp, uploadURL) => {
       mime_type: file.type,
     }
   });
+
+
 
   // set hidden field value to the uploaded file data so that it's submitted with the form as the attachment
   var hiddenInput = $("#immaHidden");
